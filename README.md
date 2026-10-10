@@ -46,7 +46,7 @@ The front end for a GTK version that isn't installed is skipped
 
 `scripts\run.ps1` copies otd-wintab's `dwmapi.dll` proxy and
 `otd-wintab32.dll` next to the executable (from `-OtdWintab`, default
-`S:\repos\otd-wintab\build`), puts `-GtkOverride` directories and then
+`..\otd-wintab\build`: an otd-wintab checkout next to this one), puts `-GtkOverride` directories and then
 `C:\msys64\clang64\bin` in front of `PATH`, sets the otd-wintab
 environment and runs the app. The calling shell's environment is restored
 afterwards.
@@ -59,8 +59,8 @@ afterwards.
 | emulated tablet, mouse is the pen | `.\scripts\run.ps1 -Gtk 4 -Emulate` |
 | emulated tablet, play the demo at startup | `.\scripts\run.ps1 -Gtk 3 -Emulate -Script` |
 | GTK 3 itself, without otd-wintab's GTK 3 workarounds | add `-NoGlue` |
-| patched GTK 3 build | `-GtkOverride S:\repos\gtk-wintab-build\gdk, S:\repos\gtk-wintab-build\gtk` |
-| patched GTK 4 build | `-GtkOverride S:\repos\gtk4-wintab-build\gtk` |
+| a GTK 3 build | `-GtkOverride <gtk3-build>\gdk, <gtk3-build>\gtk` |
+| a GTK 4 build | `-GtkOverride <gtk4-build>\gtk` |
 | GIMP's device modes and stroke grab (GTK 3) | add `-Gimp` |
 | Windows Ink instead of Wintab | add `-Api winpointer` |
 | otd-wintab log + event log on stdout | add `-Log` |
@@ -71,8 +71,12 @@ with the emulator:
 
 ```powershell
 .\scripts\run.ps1 -Gtk 3 -NoGlue -Emulate
-.\scripts\run.ps1 -Gtk 3 -NoGlue -Emulate -GtkOverride S:\repos\gtk-wintab-build\gdk, S:\repos\gtk-wintab-build\gtk
+.\scripts\run.ps1 -Gtk 3 -NoGlue -Emulate -GtkOverride <gtk3-build>\gdk, <gtk3-build>\gtk
 ```
+
+otd-wintab's `scripts\build-gtk.ps1` builds GTK 3 or 4 from a checkout
+and prints the directories to pass to `-GtkOverride`; see its
+[docs/gtk-testing.md](https://github.com/alexiade/otd-wintab/blob/main/docs/gtk-testing.md).
 
 The executables take the same options directly (`doodle3 --help`):
 `--emulate`, `--instance=NAME`, `--script`, `--system-wintab`, `--no-glue`,

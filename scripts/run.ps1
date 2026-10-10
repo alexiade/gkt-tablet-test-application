@@ -12,8 +12,8 @@
 .EXAMPLE
     .\scripts\run.ps1                          # GTK 3, real tablet through OpenTabletDriver
     .\scripts\run.ps1 -Gtk 4 -Emulate          # GTK 4, the mouse drives an emulated pen
-    .\scripts\run.ps1 -Gtk 3 -NoGlue -GtkOverride S:\repos\gtk-wintab-build\gdk, S:\repos\gtk-wintab-build\gtk
-    .\scripts\run.ps1 -Gtk 4 -GtkOverride S:\repos\gtk4-wintab-build\gtk -Emulate -Script
+    .\scripts\run.ps1 -Gtk 3 -NoGlue -GtkOverride <gtk3-build>\gdk, <gtk3-build>\gtk
+    .\scripts\run.ps1 -Gtk 4 -GtkOverride <gtk4-build>\gtk -Emulate -Script
     .\scripts\run.ps1 -SystemWintab            # the vendor's Wintab32.dll (e.g. Wacom)
     .\scripts\run.ps1 -Gtk 4 -Smoke            # print providers and devices, exit; no input
 #>
@@ -29,7 +29,7 @@ param(
     [switch]$Gimp,                     # GTK 3: GIMP's device modes and stroke grab
     [ValidateSet('', 'wintab', 'winpointer', 'none', 'default')][string]$Api = '',
     [switch]$Log,                      # otd-wintab log to build\doodle<N>-wintab.log, events to stdout
-    [string]$OtdWintab = 'S:\repos\otd-wintab\build',
+    [string]$OtdWintab = (Join-Path $PSScriptRoot '..\..\otd-wintab\build'),  # an otd-wintab checkout next to this one
     [string]$GtkBin = 'C:\msys64\clang64\bin',
     [Parameter(ValueFromRemainingArguments)][string[]]$Rest = @()
 )
