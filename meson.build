@@ -18,3 +18,9 @@ if gtk3.found()
   executable('doodle3', common, 'src/gtk3/doodle3.c',
     include_directories: inc, dependencies: [gtk3, win32], install: true)
 endif
+
+gtk4 = dependency('gtk4', version: '>= 4.12', required: get_option('gtk4'))
+if gtk4.found()
+  executable('doodle4', common, 'src/gtk4/doodle4.c',
+    include_directories: inc, dependencies: [gtk4, win32], install: true)
+endif

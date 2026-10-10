@@ -1,1 +1,2 @@
 option('gtk3', type: 'feature', value: 'auto', description: 'Build the GTK 3 front end (doodle3)')
+option('gtk4', type: 'feature', value: 'auto', description: 'Build the GTK 4 front end (doodle4)')
