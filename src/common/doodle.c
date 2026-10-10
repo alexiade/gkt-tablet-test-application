@@ -160,7 +160,8 @@ char *doodle_status(void)
     if (sys) g_string_append_printf(s, "Wintab: system %s\n", sys);
     if (!otd && !sys) g_string_append(s, "Wintab: not loaded\n");
     g_string_append_printf(s, "dwmapi: %s%s\n", dwm ? dwm : "not loaded",
-                           dwm_dir && exe_dir && !g_ascii_strcasecmp(dwm_dir, exe_dir) ? " (otd-wintab proxy)" : "");
+                           !dwm_dir || !exe_dir || g_ascii_strcasecmp(dwm_dir, exe_dir) ? "" :
+                           env_set("OTD_WINTAB_DISABLE") ? " (otd-wintab proxy, disabled)" : " (otd-wintab proxy)");
     if (ring_ok)
         g_string_append_printf(s, "Tablet: emulated, ring instance \"%s\"\n", inst);
     else if (env_set("OTD_WINTAB_DISABLE") || !otd)
