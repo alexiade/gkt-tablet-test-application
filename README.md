@@ -16,6 +16,16 @@ itself act as the OpenTabletDriver side of otd-wintab and turn the mouse
 into a pen with any of several tools, so tablet bugs can be reproduced on
 a machine without a tablet.
 
+## Download
+
+Portable builds for 64-bit Windows are on the
+[releases page](https://github.com/alexiade/gkt-tablet-test-application/releases/latest),
+one zip for GTK 3 and one for GTK 4. Each contains the app, the GTK
+runtime it was built with, and otd-wintab; unpack it anywhere and run
+`gtk-tablet-test-gtk3.cmd` or `gtk-tablet-test-gtk4.cmd`. The `README.txt`
+inside explains the options for real tablets, vendor drivers and the
+emulated pen.
+
 ## Layout
 
 ```
@@ -27,6 +37,7 @@ src/gtk3/doodle3.c          GTK 3 front end: GdkDevice per stylus, device modes
 src/gtk4/doodle4.c          GTK 4 front end: GdkDeviceTool per stylus, GtkGestureStylus
 scripts/build.ps1           build with MSYS2 CLANG64 (calls scripts/build.sh)
 scripts/run.ps1             run against stock or patched GTK, with otd-wintab injected
+scripts/package.ps1         portable zips with the GTK runtime (calls scripts/package.sh)
 ```
 
 ## Building
@@ -41,6 +52,20 @@ Needs MSYS2 with the CLANG64 packages `mingw-w64-clang-x86_64-gtk3`,
 
 The front end for a GTK version that isn't installed is skipped
 (`-Dgtk3=disabled` / `-Dgtk4=disabled` to choose).
+
+### Portable packages
+
+```powershell
+.\scripts\build.ps1; .\scripts\package.ps1
+```
+
+This puts `dist\gtk-tablet-test-<version>-gtk3-win64.zip` and `-gtk4-` next
+to each other: the executable with every MSYS2 DLL it links (found with
+`ldd`), the gdk-pixbuf loaders, GTK's settings schemas, the Adwaita and
+hicolor icon themes, otd-wintab's `dwmapi.dll` proxy and provider (from
+`-OtdWintab`, default `..\otd-wintab\build`), and the license of every
+bundled MSYS2 package with a `THIRD-PARTY.txt` overview. The README in the
+zips is `scripts\README-portable.txt`.
 
 ## Running
 

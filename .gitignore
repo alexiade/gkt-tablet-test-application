@@ -3,3 +3,4 @@
 .vscode/
 *.swp
 Thumbs.db
+/dist/
