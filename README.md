@@ -212,6 +212,16 @@ The counters under the last-event readout count the bug classes below.
   `GtkGestureStylus` on the canvas sees (`stylus down`/`up`), which is
   what most GTK 4 drawing applications build on.
 
+## Acknowledgements
+
+This app was developed and tested on a Wacom Intuos3 with an Art Pen and
+an airbrush that Ping Cheng, then working on Linux support at Wacom, sent
+to me over fifteen years ago, when I was a broke young GIMP contributor in
+Eastern Europe. Back then that tablet helped get the Art Pen and airbrush
+working through the whole Linux stack, from the kernel and X drivers to
+GTK and GIMP, and it is still the hardware these GTK fixes are tested on.
+Thank you, Ping.
+
 ## License
 
 LGPL-2.1-or-later, see [COPYING](COPYING). `src/common/ring.[ch]` and
